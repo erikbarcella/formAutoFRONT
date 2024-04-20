@@ -1,7 +1,6 @@
-// Register.js
-
 import React, { useState } from 'react';
 import {
+  CAlert,
   CButton,
   CCard,
   CCardBody,
@@ -15,33 +14,29 @@ import {
 } from '@coreui/react';
 import CIcon from '@coreui/icons-react';
 import { cilLockLocked, cilUser } from '@coreui/icons';
-import registerUser from './../../../services/registerUser'; // Importar a função de registro
+import registerUser from './../../../services/registerUser';
 
 const Register = () => {
-  // Estado para os dados do formulário
   const [userData, setUserData] = useState({
     name: '',
     email: '',
     password: '',
     confirmPassword: '',
   });
+  const [alert, setAlert] = useState(null);
 
   // Função para lidar com o envio do formulário
   const handleRegister = async () => {
     try {
       // Verificar se as senhas coincidem
       if (userData.password !== userData.confirmPassword) {
-        alert('As senhas não coincidem');
+        setAlert({ color: 'danger', message: 'As senhas não coincidem' });
         return;
       }
-
       // Chamar a função de registro com os dados do usuário
       const response = await registerUser(userData);
-
-      // Se o registro for bem-sucedido, você pode lidar com a resposta aqui
-      console.log('Usuário registrado com sucesso:', response);
-      alert('Usuário registrado com sucesso!');
-      
+      // Se o registro for bem-sucedido, configurar o alerta de sucesso
+      setAlert({ color: 'success', message: 'Usuário registrado com sucesso' });
       // Limpar os campos após o registro
       setUserData({
         name: '',
@@ -50,8 +45,8 @@ const Register = () => {
         confirmPassword: '',
       });
     } catch (error) {
-      console.error('Erro ao registrar usuário:', error.message);
-      alert('Erro ao registrar usuário. Por favor, tente novamente.');
+      // Se ocorrer um erro, configurar o alerta de erro
+      setAlert({ color: 'danger', message: 'Erro ao registrar usuário. Por favor, tente novamente.' });
     }
   };
 
@@ -72,21 +67,14 @@ const Register = () => {
             <CCard className="mx-4">
               <CCardBody className="p-4">
                 <CForm>
-                  <h1>Register</h1>
+                  <h1>Registre-se</h1>
                   <p className="text-body-secondary">Crie sua conta</p>
-                  <CInputGroup className="mb-3">
-                    <CInputGroupText>
-                      <CIcon icon={cilUser} />
-                    </CInputGroupText>
-                    <CFormInput
-                      name="name"
-                      value={userData.name}
-                      onChange={handleChange}
-                      placeholder="Nome"
-                      autoComplete="username"
-                    />
-                  </CInputGroup>
-                  <CInputGroup className="mb-3">
+                  {alert && (
+                    <CAlert color={alert.color}>
+                      {alert.message}
+                    </CAlert>
+                  )}
+                     <CInputGroup className="mb-3">
                     <CInputGroupText>@</CInputGroupText>
                     <CFormInput
                       name="email"
