@@ -6,13 +6,13 @@ const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL
 });
 // Interceptor para incluir o token nas solicitações
-api.interceptors.request.use((config) => {
-  const token = getTokenLocal();
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
+// api.interceptors.request.use((config) => {
+//   const token = getTokenLocal();
+//   if (token) {
+//     config.headers.Authorization = `Bearer ${token}`;
+//   }
+//   return config;
+// });
 
 // Interceptor para tratar erros
 // api.interceptors.response.use(
