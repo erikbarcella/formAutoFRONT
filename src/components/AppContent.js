@@ -5,6 +5,7 @@ import { CContainer, CSpinner } from '@coreui/react'
 // routes config
 import routes from '../routes'
 
+// Implementar estrategia de AUTH
 const AppContent = () => {
   return (
     <CContainer className="px-4" lg>
@@ -23,7 +24,7 @@ const AppContent = () => {
               )
             )
           })}
-          <Route path="/" element={<Navigate to="dashboard" replace />} />
+          <Route path="/" element={<Navigate to="login" replace />} />
         </Routes>
       </Suspense>
     </CContainer>
