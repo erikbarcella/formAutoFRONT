@@ -25,17 +25,13 @@ const Register = () => {
   });
   const [alert, setAlert] = useState(null);
 
-  // Função para lidar com o envio do formulário
   const handleRegister = async () => {
     try {
-      // Verificar se as senhas coincidem
       if (userData.password !== userData.confirmPassword) {
         setAlert({ color: 'danger', message: 'As senhas não coincidem' });
         return;
       }
-      // Chamar a função de registro com os dados do usuário
       const response = await registerUser(userData);
-      // Se o registro for bem-sucedido, configurar o alerta de sucesso
       setAlert({ color: 'success', message: 'Usuário registrado com sucesso' });
       // Limpar os campos após o registro
       setUserData({
@@ -45,8 +41,10 @@ const Register = () => {
         confirmPassword: '',
       });
     } catch (error) {
-      // Se ocorrer um erro, configurar o alerta de erro
-      setAlert({ color: 'danger', message: 'Erro ao registrar usuário. Por favor, tente novamente.' });
+      let message = 'Erro ao registrar usuário';
+      if (error.data.error) message += error.data.error
+      console.log("page register err", error.data)
+      setAlert({ color: 'danger', message: `${message}` });
     }
   };
 
@@ -74,7 +72,7 @@ const Register = () => {
                       {alert.message}
                     </CAlert>
                   )}
-                     <CInputGroup className="mb-3">
+                    <CInputGroup className="mb-3">
                     <CInputGroupText>@</CInputGroupText>
                     <CFormInput
                       name="email"
@@ -82,6 +80,18 @@ const Register = () => {
                       onChange={handleChange}
                       placeholder="Email"
                       autoComplete="email"
+                    />
+                  </CInputGroup>
+                    <CInputGroup className="mb-3">
+                      <CInputGroupText>
+                        <CIcon icon={cilUser} />
+                      </CInputGroupText>
+                    <CFormInput
+                      name="name"
+                      value={userData.name}
+                      onChange={handleChange}
+                      placeholder="Insira seu nome"
+                      autoComplete="name"
                     />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
