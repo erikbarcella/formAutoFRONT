@@ -1,6 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React,{ useState } from 'react'
+import { Link } from 'react-router-dom';
 import {
+  CAlert,
   CButton,
   CCard,
   CCardBody,
@@ -15,8 +16,49 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
+import loginUser from './../../../services/loginUser';
+import { useAuth } from '../../../context/AuthContext';
 
 const Login = () => {
+
+  const [alert, setAlert] = useState(null);
+  const {user,login,isAuthenticated} = useAuth();
+  
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+  });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+
+  const handleLogin = async (e) => {
+    try {
+      e.preventDefault();
+      const response = await loginUser(formData);
+      console.log("response", response)
+      login(response.user,response.user.token)
+      window.location.href = '/#/dashboard';
+      setAlert({ color: 'success', message: 'Login bem sucedido' });
+      // Limpar os campos após o registro
+      setFormData({
+        username: '',
+        password: '',
+      });
+    } catch (error) {
+      console.log("error", error)
+      let message = 'Erro durante o login';
+      if (error.data.error) message += ` ${error.data.error}`;
+      setAlert({ color: 'danger', message: `${message}` });
+    }
+  };
+
+
   return (
     <div className="bg-body-tertiary min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -25,28 +67,42 @@ const Login = () => {
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
-                  <CForm>
+                  <CForm onSubmit={handleLogin}>
                     <h1>Login</h1>
+                    {alert && (
+                    <CAlert color={alert.color}>
+                      {alert.message}
+                    </CAlert>
+                  )}
                     <p className="text-body-secondary">Faça login em sua conta</p>
                     <CInputGroup className="mb-3">
                       <CInputGroupText>
                         <CIcon icon={cilUser} />
                       </CInputGroupText>
-                      <CFormInput placeholder="Username" autoComplete="username" />
+                      <CFormInput
+                        name="username"
+                        placeholder="Username"
+                        autoComplete="username"
+                        value={formData.username}
+                        onChange={handleInputChange}
+                      />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupText>
                         <CIcon icon={cilLockLocked} />
                       </CInputGroupText>
                       <CFormInput
+                        name="password"
                         type="password"
                         placeholder="Password"
                         autoComplete="current-password"
+                        value={formData.password}
+                        onChange={handleInputChange}
                       />
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <CButton color="primary" className="px-4">
+                        <CButton type="submit" color="primary" className="px-4">
                           Login
                         </CButton>
                       </CCol>

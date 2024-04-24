@@ -48,9 +48,9 @@ const App = () => {
           <Route exact path="/500" name="Page 500" element={<Page500 />} />
           
         {/* ROUTE PRIVATE EXAMPLE FOR NEED TO AUTH ON APP */}
-          {/* <Route path="*" name="Home"  element={ <PrivateRoute> <DefaultLayout /> </PrivateRoute> } /> */}
+          <Route path="*" name="Home"  element={ <PrivateRoute> <DefaultLayout /> </PrivateRoute> } />
           {/* <Route path="*" name="Home" element={<DefaultLayout />} /> */}
-          <Route path="*" name="Home" element={<Login />} /> 
+          {/* <Route path="*" name="Home" element={<Login />} />  */}
         </Routes>
       </Suspense>
     </HashRouter>
