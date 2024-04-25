@@ -8,7 +8,7 @@ const loginUser = async (userData) => {
         );
         return response.data;
     } catch (error) {
-        console.log("login user ", error)
+        console.log("error service ", error)
         let err;
         if(error.response.data) err = error.response;
         else err = error;

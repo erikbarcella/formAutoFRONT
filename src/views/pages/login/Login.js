@@ -1,4 +1,4 @@
-import React,{ useState } from 'react'
+import React,{ useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import {
   CAlert,
@@ -22,8 +22,9 @@ import { useAuth } from '../../../context/AuthContext';
 const Login = () => {
 
   const [alert, setAlert] = useState(null);
-  const {user,login,isAuthenticated} = useAuth();
-  
+  const {login, isAuthenticated, logout} = useAuth();
+  const [shouldRedirect, setShouldRedirect] = useState(false);
+
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -41,23 +42,43 @@ const Login = () => {
     try {
       e.preventDefault();
       const response = await loginUser(formData);
-      console.log("response", response)
-      login(response.user,response.user.token)
-      window.location.href = '/#/dashboard';
+      login(response.user, response.user.token);
       setAlert({ color: 'success', message: 'Login bem sucedido' });
       // Limpar os campos após o registro
       setFormData({
         username: '',
         password: '',
       });
+      // Redirecionar para o dashboard após um curto atraso
+      setTimeout(() => {
+        window.location.href = '/#/dashboard';
+      }, 2000);
     } catch (error) {
-      console.log("error", error)
+      console.log('handle login error', error);
+      logout();
       let message = 'Erro durante o login';
       if (error.data.error) message += ` ${error.data.error}`;
       setAlert({ color: 'danger', message: `${message}` });
     }
   };
-
+  
+  
+  useEffect(() => {
+    if (isAuthenticated()) {
+      // Aguardar 2 segundos antes de redirecionar para o dashboard
+      const redirectTimeout = setTimeout(() => {
+        setShouldRedirect(true);
+      }, 1000);
+      // Limpar o timeout ao desmontar o componente
+      return () => clearTimeout(redirectTimeout);
+    }
+  }, [isAuthenticated]);
+  
+  useEffect(() => {
+    if (shouldRedirect) {
+      window.location.href = '/#/dashboard';
+    }
+  }, [shouldRedirect]);  
 
   return (
     <div className="bg-body-tertiary min-vh-100 d-flex flex-row align-items-center">
