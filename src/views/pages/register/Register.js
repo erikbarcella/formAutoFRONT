@@ -42,7 +42,7 @@ const Register = () => {
       });
     } catch (error) {
       let message = 'Erro ao registrar usuário';
-      if (error.data.error) message += ` ${error.data.error}`;
+      if (error.data.error) message += `, ${error.data.error}`;
       setAlert({ color: 'danger', message: `${message}` });
     }
   };

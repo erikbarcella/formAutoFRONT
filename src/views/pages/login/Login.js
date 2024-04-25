@@ -42,7 +42,9 @@ const Login = () => {
     try {
       e.preventDefault();
       const response = await loginUser(formData);
-      login(response.user, response.user.token);
+      const userData = {...response.user}; 
+      delete userData.token;
+      login(userData, response.user.token);
       setAlert({ color: 'success', message: 'Login bem sucedido' });
       // Limpar os campos após o registro
       setFormData({
@@ -57,7 +59,7 @@ const Login = () => {
       console.log('handle login error', error);
       logout();
       let message = 'Erro durante o login';
-      if (error.data.error) message += ` ${error.data.error}`;
+      if (error.data.error) message += `, ${error.data.error}`;
       setAlert({ color: 'danger', message: `${message}` });
     }
   };
