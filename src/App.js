@@ -52,8 +52,8 @@ const App = () => {
           <Route exact path="/404" name="Page 404" element={<Page404 />} />
           <Route exact path="/500" name="Page 500" element={<Page500 />} />
         {/* ROUTE PRIVATE EXAMPLE FOR NEED TO AUTH ON APP */}
-          <Route path="*" name="Home"  element={ <PrivateRoute> <DefaultLayout /> </PrivateRoute> } />
-          <Route exact path="/home" name="Home Page" element={ <PrivateRoute> <Home /> </PrivateRoute> } />
+          <Route path="*" name="App Home"  element={ <PrivateRoute> <DefaultLayout /> </PrivateRoute> } /> 
+          {/*<Route exact path="/home" name="Home Page" element={ <PrivateRoute> <Home /> </PrivateRoute> } />*/}
           {/* VALIDAÇÃO DE ROLES  */}
           {/* <Route path="/admin" name="Admin Page" element={<Authorization allowedRoles={['admin']}> <Admin /> </Authorization>} /> */}
         </Routes>
