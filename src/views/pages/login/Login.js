@@ -130,9 +130,11 @@ const Login = () => {
                         </CButton>
                       </CCol>
                       <CCol xs={6} className="text-right">
+                        < Link to="/forgotPassword">
                         <CButton color="link" className="px-0">
                           Esqueceu a senha?
                         </CButton>
+                        </Link>
                       </CCol>
                     </CRow>
                   </CForm>
