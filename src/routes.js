@@ -53,6 +53,7 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
 const routes = [
   { path: '/', exact: true, name: 'RoutesHome' },
+  // IMPLEMENTAR ESTRATEGIA DE AUTH ROLES
   { path: '/admin', name: 'Admin Page', element: Admin, allowedRoles: ['admin'] },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },

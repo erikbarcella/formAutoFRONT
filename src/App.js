@@ -46,12 +46,14 @@ const App = () => {
         }
       >
         <Routes>
+          {/*ROTAS QUE SERÃO RENDERIZADAS FORA DO CONTAINER COM ESTILO PROPRIO */}
           <Route exact path="/login" name="Login Page" element={<Login />} />
           <Route exact path="/register" name="Register Page" element={<Register />} />
           <Route exact path="/forgotPassword" name="Forgot Password Page" element={<Forgot />} />
           <Route exact path="/404" name="Page 404" element={<Page404 />} />
           <Route exact path="/500" name="Page 500" element={<Page500 />} />
-        {/* ROUTE PRIVATE EXAMPLE FOR NEED TO AUTH ON APP */}
+        {/* ROUTE PRIVATE EXAMPLE FOR NEED TO AUTH ON APP
+        AQUI PODERIA RENDERIZAR UM LAYOUT PARA O ADMIN E OUTRO PARA OS DEMAIS USUARIOS  */}
           <Route path="*" name="App Home"  element={ <PrivateRoute> <DefaultLayout /> </PrivateRoute> } /> 
           {/*<Route exact path="/home" name="Home Page" element={ <PrivateRoute> <Home /> </PrivateRoute> } />*/}
           {/* VALIDAÇÃO DE ROLES  */}
