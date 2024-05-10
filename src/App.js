@@ -55,7 +55,7 @@ const App = () => {
           <Route path="*" name="Home"  element={ <PrivateRoute> <DefaultLayout /> </PrivateRoute> } />
           <Route exact path="/home" name="Home Page" element={ <PrivateRoute> <Home /> </PrivateRoute> } />
           {/* VALIDAÇÃO DE ROLES  */}
-          <Route path="/admin" name="Admin Page" element={<Authorization allowedRoles={['admin']}> <Admin /> </Authorization>} />
+          {/* <Route path="/admin" name="Admin Page" element={<Authorization allowedRoles={['admin']}> <Admin /> </Authorization>} /> */}
         </Routes>
       </Suspense>
     </HashRouter>
