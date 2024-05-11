@@ -33,6 +33,15 @@ const AppContent = () => {
                   element={<route.element />}
                 />
               );
+            } else {
+              // Exibe uma mensagem ou alerta para o usuário sem permissão
+              return (
+                <Route
+                  key={idx}
+                  path={route.path}
+                  element={<UnauthorizedPage />}
+                />
+              );
             }
             return null;
           })}
@@ -42,5 +51,12 @@ const AppContent = () => {
     </CContainer>
   )
 }
-
+const UnauthorizedPage = () => {
+  return (
+    <div>
+      <h1>Você não tem permissão para acessar esta página.</h1>
+      {/* Aqui você pode exibir uma mensagem mais detalhada ou instruções */}
+    </div>
+  );
+};
 export default React.memo(AppContent)
