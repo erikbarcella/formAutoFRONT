@@ -2,7 +2,6 @@ import React, { Suspense, useEffect } from 'react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { PrivateRoute } from "./routes/privateRoutes";
-import { Authorization } from './routes/rolesRoutes';
 import { CSpinner, useColorModes } from '@coreui/react'
 import './scss/style.scss'
 
@@ -49,13 +48,10 @@ const App = () => {
           <Route exact path="/register" name="Register Page" element={<Register />} />
           <Route exact path="/forgotPassword" name="Forgot Password Page" element={<Forgot />} />
           <Route exact path="/404" name="Page 404" element={<Page404 />} />
-          <Route exact path="/500" name="Page 500" element={<Page500 />} />
+          <Route path="/500" name="Page 500" element={<Page500 />} />
         {/* ROUTE PRIVATE EXAMPLE FOR NEED TO AUTH ON APP
         AQUI PODERIA RENDERIZAR UM LAYOUT PARA O ADMIN E OUTRO PARA OS DEMAIS USUARIOS  */}
           <Route path="*" name="App Home"  element={ <PrivateRoute> <DefaultLayout /> </PrivateRoute> } /> 
-          {/*<Route exact path="/home" name="Home Page" element={ <PrivateRoute> <Home /> </PrivateRoute> } />*/}
-          {/* VALIDAÇÃO DE ROLES  */}
-          {/* <Route path="/admin" name="Admin Page" element={<Authorization allowedRoles={['admin']}> <Admin /> </Authorization>} /> */}
         </Routes>
       </Suspense>
     </HashRouter>
