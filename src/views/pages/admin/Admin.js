@@ -46,7 +46,7 @@ const Admin = () => {
 								<CTableDataCell>Ativo</CTableDataCell>
 								<CTableDataCell>
 									<CDropdown variant="btn-group">
-										<CDropdownToggle color="primary" size="sm">Action</CDropdownToggle>
+										<CDropdownToggle color="success" size="sm">Action</CDropdownToggle>
 										<CDropdownMenu>
 											<CDropdownItem href="#">Action</CDropdownItem>
 											<CDropdownItem href="#">Another action</CDropdownItem>
