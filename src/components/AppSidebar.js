@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useAuth } from '../context/AuthContext'
 
 import {
   CCloseButton,
@@ -13,7 +14,6 @@ import CIcon from '@coreui/icons-react'
 
 import { AppSidebarNav } from './AppSidebarNav'
 
-// import { logo } from 'src/assets/brand/logo'
 import { logo } from 'src/assets/brand/logo'
 import { sygnet } from 'src/assets/brand/sygnet'
 
@@ -21,9 +21,18 @@ import { sygnet } from 'src/assets/brand/sygnet'
 import navigation from '../_nav'
 
 const AppSidebar = () => {
+  const { user } = useAuth();
   const dispatch = useDispatch()
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
+  
+  const filteredNavigation = navigation.filter((item) => {
+    // Se o item não tiver roles definidas ou se o usuário for um admin, permita o acesso
+    if (!item.roles || user.roles.includes('admin')) {
+      return true;
+    }
+    return item.roles.some((role) => user.roles.includes(role));
+  });
 
   return (
     <CSidebar
@@ -47,7 +56,7 @@ const AppSidebar = () => {
           onClick={() => dispatch({ type: 'set', sidebarShow: false })}
         />
       </CSidebarHeader>
-      <AppSidebarNav items={navigation} />
+      <AppSidebarNav items={filteredNavigation} />
       <CSidebarFooter className="border-top d-none d-lg-flex">
         <CSidebarToggler
           onClick={() => dispatch({ type: 'set', sidebarUnfoldable: !unfoldable })}

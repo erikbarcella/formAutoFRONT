@@ -2,6 +2,7 @@ import React from 'react'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Admin = React.lazy(() => import('./views/pages/admin/Admin'))
+const Home = React.lazy(() => import('./views/pages/home/Home'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
 
@@ -55,6 +56,7 @@ const routes = [
   // { path: '/', exact: true, name: 'home' },
   // IMPLEMENTAR ESTRATEGIA DE AUTH ROLES
   { path: '/admin', name: 'Admin Page', element: Admin, allowedRoles: ['admin'] },
+  { path: '/home', name: 'Home Page', element: Home },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
