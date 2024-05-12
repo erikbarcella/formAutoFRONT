@@ -306,7 +306,7 @@ const _nav_base = [
   },
 ]
 
-const _nav = [
+const _nav_local = [
   {
     component: CNavItem,
     name: 'Dashboard',
@@ -339,4 +339,4 @@ const _nav = [
 ]
 
 // console.log('user', user)
-export default _nav
+export default _nav_local

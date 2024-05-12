@@ -1,6 +1,66 @@
-const Admin = () =>{
+import {
+	CCard,
+	CCardBody,
+	CCardHeader,
+	CCol,
+	CTable,
+	CTableBody,
+	CTableDataCell,
+	CTableHead,
+	CTableHeaderCell,
+	CTableRow,
+	CDropdown,
+	CDropdownToggle,
+	CDropdownMenu,
+	CDropdownItem,
+} from '@coreui/react'
+
+const Admin = () => {
 	return (
-		<h1>Admin</h1>
+		<CCol xs={12}>
+			<CCard className="mb-4">
+				<CCardHeader>
+					<strong>Gerenciar usúarios</strong>
+					{/* <small>Hoverable rows</small> */}
+				</CCardHeader>
+				<CCardBody>
+					<p className="text-body-secondary small">
+						Utilize o botão de ação para configurar os usúarios.
+					</p>
+
+					<CTable color="auto" hover>
+						<CTableHead>
+							<CTableRow>
+								<CTableHeaderCell scope="col">#</CTableHeaderCell>
+								<CTableHeaderCell scope="col">Class</CTableHeaderCell>
+								<CTableHeaderCell scope="col">Heading</CTableHeaderCell>
+								<CTableHeaderCell scope="col">Heading</CTableHeaderCell>
+								<CTableHeaderCell scope="col">Action</CTableHeaderCell>
+							</CTableRow>
+						</CTableHead>
+						<CTableBody>
+							<CTableRow>
+								<CTableHeaderCell scope="row">1</CTableHeaderCell>
+								<CTableDataCell>Mark</CTableDataCell>
+								<CTableDataCell>Otto</CTableDataCell>
+								<CTableDataCell>@mdo</CTableDataCell>
+								<CTableDataCell>
+									<CDropdown variant="btn-group">
+										<CDropdownToggle color="primary" size="sm">Action</CDropdownToggle>
+										<CDropdownMenu>
+											<CDropdownItem href="#">Action</CDropdownItem>
+											<CDropdownItem href="#">Another action</CDropdownItem>
+											<CDropdownItem href="#">Something else here</CDropdownItem>
+										</CDropdownMenu>
+									</CDropdown>
+								</CTableDataCell>
+							</CTableRow>
+						</CTableBody>
+					</CTable>
+
+				</CCardBody>
+			</CCard>
+		</CCol>
 	)
 }
 
