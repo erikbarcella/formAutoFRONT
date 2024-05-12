@@ -31,10 +31,10 @@ const Admin = () => {
 					<CTable color="auto" hover>
 						<CTableHead>
 							<CTableRow>
-								<CTableHeaderCell scope="col">#</CTableHeaderCell>
-								<CTableHeaderCell scope="col">Class</CTableHeaderCell>
-								<CTableHeaderCell scope="col">Heading</CTableHeaderCell>
-								<CTableHeaderCell scope="col">Heading</CTableHeaderCell>
+								<CTableHeaderCell scope="col">Online</CTableHeaderCell>
+								<CTableHeaderCell scope="col">Nome</CTableHeaderCell>
+								<CTableHeaderCell scope="col">Email</CTableHeaderCell>
+								<CTableHeaderCell scope="col">Status</CTableHeaderCell>
 								<CTableHeaderCell scope="col">Action</CTableHeaderCell>
 							</CTableRow>
 						</CTableHead>
@@ -42,8 +42,8 @@ const Admin = () => {
 							<CTableRow>
 								<CTableHeaderCell scope="row">1</CTableHeaderCell>
 								<CTableDataCell>Mark</CTableDataCell>
-								<CTableDataCell>Otto</CTableDataCell>
-								<CTableDataCell>@mdo</CTableDataCell>
+								<CTableDataCell>mark@gmail.com</CTableDataCell>
+								<CTableDataCell>Ativo</CTableDataCell>
 								<CTableDataCell>
 									<CDropdown variant="btn-group">
 										<CDropdownToggle color="primary" size="sm">Action</CDropdownToggle>
