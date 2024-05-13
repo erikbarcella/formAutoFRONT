@@ -14,8 +14,38 @@ import {
 	CDropdownMenu,
 	CDropdownItem,
 } from '@coreui/react'
+import { useEffect, useState } from 'react'
+import { useAuth } from '../../../context/AuthContext'
+import api from '../../../services/api'
 
 const Admin = () => {
+
+	const [users, setUsers] = useState([]);
+	const { logout } = useAuth();
+
+	useEffect(() => {
+    async function fetchUsers() {
+      try {
+        const response = await api.get('/user');
+		console.log("carregando usuarios")
+		console.log(response.data)
+        if (response.data.users) {
+          setUsers(response.data.users);
+        }
+      } catch (err) {
+		console.log("err admin ", err)
+        if (err.response && err.response.data === 'Unauthorized') {
+          logout();
+          return alert("Token expirado. Faça login novamente.");
+        }
+      } finally {
+        // setLoading(false);	
+      }
+    }
+
+    fetchUsers();
+  }, [logout]);
+
 	return (
 		<CCol xs={12}>
 			<CCard className="mb-4">
@@ -64,4 +94,4 @@ const Admin = () => {
 	)
 }
 
-export default Admin
+export default Admin;
