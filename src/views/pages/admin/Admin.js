@@ -25,12 +25,22 @@ const Admin = () => {
 	const { logout } = useAuth();
 	const [alert, setAlert] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
-
+	const formatDate = isoString => new Date(isoString).toLocaleString('pt-BR', { timeZone: 'UTC', hour12: false }).replace(',',' -').slice(0, -3);
+	const isUserOnline = (lastActive) => {
+		
+		const lastActiveDate = new Date(lastActive);
+		console.log("lastActiveDate ", lastActiveDate)
+		const now = new Date();
+		console.log("now ", now)
+		const fiveMinutesInMilliseconds = 5 * 60 * 1000;
+		let status = now - lastActiveDate < fiveMinutesInMilliseconds ? true : false 
+		console.log("status ", status)
+		return status
+	};
 	useEffect(() => {
 		async function fetchUsers() {
 			try {
 				const response = await api.get('/user');
-				console.log(response.data)
 				if (response.data.users) setUsers(response.data.users);
 
 			} catch (err) {
@@ -85,12 +95,12 @@ const Admin = () => {
 							<CTableBody align="middle">
 								{users.map((user, index) => (
 									<CTableRow key={index}>
-										<CTableHeaderCell scope="row">1</CTableHeaderCell>
+										<CTableHeaderCell scope="row">{isUserOnline(user.lastActive) ? 'Online' : 'Offline'}</CTableHeaderCell>
 										<CTableDataCell>{user.name}</CTableDataCell>
 										<CTableDataCell>{user.email}</CTableDataCell>
 										<CTableDataCell>{user.active ? 'Ativo' : 'Inativo'}</CTableDataCell>
 										<CTableDataCell>{user.roles.join(', ')}</CTableDataCell>
-										<CTableDataCell>{user.lastActive}</CTableDataCell>
+										<CTableDataCell>{formatDate(user.lastActive)}</CTableDataCell>
 										<CTableDataCell>
 											<CDropdown variant="btn-group">
 												<CDropdownToggle color="success" size="sm">Action</CDropdownToggle>
