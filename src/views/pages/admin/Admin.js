@@ -126,13 +126,17 @@ const Admin = () => {
 										<CTableDataCell>{user.roles.join(', ')}</CTableDataCell>
 										<CTableDataCell>{formatDate(user.lastActive)}</CTableDataCell>
 										<CTableDataCell>
-											<CDropdown variant="btn-group" style={{ float: 'right' }}>
-												<CDropdownToggle color="success" size="sm">Opções</CDropdownToggle>
-												<CDropdownMenu>
+											<CDropdown variant="btn-group" alignment="end">
+												<CDropdownToggle color="success" size="sm" >Opções</CDropdownToggle>
+												<CDropdownMenu >
 													{/* BOTAO DE SALVAR AS INFOS OU  EXCLUIR O USUARIO */}
-													<CDropdownItem href="#"><CIcon icon={cilPencil}/>Editar</CDropdownItem>
-													<CDropdownItem href="#"><CIcon icon={cilPin}/>Alterar senha</CDropdownItem>
-													<CDropdownItem href="#"><CIcon icon={cilLockLocked}/>Bloquear Acesso</CDropdownItem>
+													<CDropdownItem href="#" ><CIcon icon={cilPencil}/>
+													<span style={{ marginLeft: '0.5rem' }}>Editar</span>
+													</CDropdownItem>
+													<CDropdownItem href="#"><CIcon icon={cilPin}/>
+													<span style={{ marginLeft: '0.5rem' }}>Alterar senha</span></CDropdownItem>
+													<CDropdownItem href="#"><CIcon icon={cilLockLocked}/>
+													<span style={{ marginLeft: '0.5rem' }}>Ativar/Inativar</span></CDropdownItem>
 												</CDropdownMenu>
 											</CDropdown>
 										</CTableDataCell>

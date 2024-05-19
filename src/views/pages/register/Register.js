@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   CAlert,
   CButton,
@@ -15,6 +16,7 @@ import {
 import CIcon from '@coreui/icons-react';
 import { cilLockLocked, cilUser } from '@coreui/icons';
 import registerUser from './../../../services/registerUser';
+import { right } from '@popperjs/core';
 
 const Register = () => {
   const [userData, setUserData] = useState({
@@ -58,11 +60,17 @@ const Register = () => {
 
   return (
     <div className="bg-body-tertiary min-vh-100 d-flex flex-row align-items-center">
+
       <CContainer>
         <CRow className="justify-content-center">
           <CCol md={9} lg={7} xl={6}>
             <CCard className="mx-4">
               <CCardBody className="p-4">
+              <CCol className="d-grid gap-2 d-md-flex justify-content-md-end" style={{  float: 'right' }}>
+                <CButton color="primary" href="#/login" active tabIndex={-1} >
+                  Inicio
+                </CButton>
+              </CCol>
                 <CForm>
                   <h1>Registre-se</h1>
                   <p className="text-body-secondary">Crie sua conta</p>
@@ -71,7 +79,7 @@ const Register = () => {
                       {alert.message}
                     </CAlert>
                   )}
-                    <CInputGroup className="mb-3">
+                  <CInputGroup className="mb-3">
                     <CInputGroupText>@</CInputGroupText>
                     <CFormInput
                       name="email"
@@ -81,10 +89,10 @@ const Register = () => {
                       autoComplete="email"
                     />
                   </CInputGroup>
-                    <CInputGroup className="mb-3">
-                      <CInputGroupText>
-                        <CIcon icon={cilUser} />
-                      </CInputGroupText>
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilUser} />
+                    </CInputGroupText>
                     <CFormInput
                       name="name"
                       value={userData.name}
